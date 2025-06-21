@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBR vs Lean Method - Understanding Research Methodologies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Page Content Styles */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-section h1 {
+            color: white;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-section p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 15px 30px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-btn.primary {
+            background: rgba(255,255,255,0.9);
+            color: #4a5568;
+        }
+
+        .cta-btn.primary:hover {
+            background: white;
+        }
+
+        /* Card Styles */
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .card h2 {
+            color: #4a5568;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        /* Method Cards */
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .method-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+        }
+
+        .dbr-card::before {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .lean-card::before {
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .method-icon {
+            font-size: 4em;
+            margin-right: 20px;
+        }
+
+        .method-title h3 {
+            color: #4a5568;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .method-title p {
+            color: #666;
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .method-description {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .learn-more-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .lean-card .learn-more-btn {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+        }
+
+        /* Process Steps */
+        .process-steps {
+            margin: 30px 0;
+        }
+
+        .process-steps h3 {
+            color: #4a5568;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.7);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .step:hover {
+            background: rgba(255,255,255,1);
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .comparison-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .comparison-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .comparison-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+        }
+
+        .comparison-title {
+            color: #4a5568;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .comparison-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .comparison-item {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .dbr-item {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .lean-item {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
+            border: 2px solid rgba(240, 147, 251, 0.3);
+        }
+
+        .comparison-item h4 {
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .comparison-item p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Back button */
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0,0,0,0.2);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-section p {
+                font-size: 1.1em;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-content {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">DBR vs Lean</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('dbr')">Design Based Research</a></li>
+                <li><a href="#" onclick="showPage('lean')">Lean Method</a></li>
+                <li><a href="#" onclick="showPage('comparison')">Compare</a></li>
+                <li><a href="#" onclick="showPage('resources')">Resources</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <div class="container">
+                <section class="hero-section">
+                    <h1>Research Methodologies Explained</h1>
+                    <p>Discover the key differences and similarities between Design Based Research and the Lean Method. Two powerful approaches to solving problems and creating solutions.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="cta-btn primary" onclick="showPage('comparison')">Compare Methods</a>
+                        <a href="#" class="cta-btn" onclick="showPage('dbr')">Learn DBR</a>
+                        <a href="#" class="cta-btn" onclick="showPage('lean')">Learn Lean</a>
+                    </div>
+
+                <div class="card">
+                    <h2>🤝 What They Share</h2>
+                    <p>Despite their differences, both methodologies share core principles:</p>
+                    <div class="methods-grid">
+                        <div class="method-card">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3em; margin-bottom: 15px;">🔄</div>
+                                <h3>Iterative Process</h3>
+                                <p>Both use cycles of design, test, learn, and improve</p>
+                            </div>
+                        </div>
+                        <div class="method-card">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3em; margin-bottom: 15px;">🌍</div>
+                                <h3>Real-World Testing</h3>
+                                <p>Solutions are tested in authentic environments</p>
+                            </div>
+                        </div>
+                        <div class="method-card">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3em; margin-bottom: 15px;">📊</div>
+                                <h3>Data-Driven Decisions</h3>
+                                <p>Evidence guides refinement and next steps</p>
+                            </div>
+                        </div>
+                        <div class="method-card">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
+                                <h3>Problem-Focused</h3>
+                                <p>Start with real challenges that need solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>🤔 Which Method Should You Choose?</h2>
+                    <div class="methods-grid">
+                        <div class="method-card dbr-card">
+                            <h3>Choose DBR When:</h3>
+                            <p>• Working on complex social or educational challenges</p>
+                            <p>• Need to contribute to academic knowledge</p>
+                            <p>• Have time for thorough investigation</p>
+                            <p>• Working with communities or public institutions</p>
+                            <p>• Seeking sustainable, long-term solutions</p>
+                        </div>
+                        <div class="method-card lean-card">
+                            <h3>Choose Lean When:</h3>
+                            <p>• Launching a business or product</p>
+                            <p>• Need quick market validation</p>
+                            <p>• Working with limited resources</p>
+                            <p>• Focused on commercial success</p>
+                            <p>• Operating in fast-moving markets</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Page -->
+        <div id="resources-page" class="page">
+            <div class="container">
+                <a href="#" class="back-btn" onclick="showPage('home')">← Back to Home</a>
+                
+                <div class="card">
+                    <h2>📚 Additional Resources</h2>
+                    <p>Explore these resources to deepen your understanding of both methodologies:</p>
+                </div>
+
+                <div class="methods-grid">
+                    <div class="method-card dbr-card">
+                        <h3>🔬 Design Based Research Resources</h3>
+                        <p><strong>Key Papers & Books:</strong></p>
+                        <p>• "Design-Based Research: An Emerging Paradigm" by Design-Based Research Collective</p>
+                        <p>• "Conducting Design-Based Research" by Susan McKenney & Thomas Reeves</p>
+                        <p>• "Design Research in Education" by Jere Confrey (Editor)</p>
+                        
+                        <p><strong>Example Applications:</strong></p>
+                        <p>• Curriculum design for STEM education</p>
+                        <p>• Educational technology development</p>
+                        <p>• Teacher professional development programs</p>
+                        <p>• Learning analytics systems</p>
+                    </div>
+
+                    <div class="method-card lean-card">
+                        <h3>🚀 Lean Method Resources</h3>
+                        <p><strong>Key Books & Frameworks:</strong></p>
+                        <p>• "The Lean Startup" by Eric Ries</p>
+                        <p>• "Lean Analytics" by Alistair Croll & Benjamin Yoskovitz</p>
+                        <p>• "The Mom Test" by Rob Fitzpatrick</p>
+                        <p>• "Inspired" by Marty Cagan</p>
+                        
+                        <p><strong>Tools & Frameworks:</strong></p>
+                        <p>• Business Model Canvas</p>
+                        <p>• Lean Canvas</p>
+                        <p>• Customer Development Process</p>
+                        <p>• Innovation Accounting</p>
+                    </div>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🎓</div>
+                            <div class="comparison-title">Academic Communities</div>
+                        </div>
+                        <p><strong>DBR Communities:</strong></p>
+                        <p>• International Society of the Learning Sciences (ISLS)</p>
+                        <p>• American Educational Research Association (AERA)</p>
+                        <p>• Design-Based Research SIG</p>
+                        
+                        <p><strong>Lean Communities:</strong></p>
+                        <p>• Lean Startup Meetups (global)</p>
+                        <p>• Product Management communities</p>
+                        <p>• Startup accelerators and incubators</p>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🛠️</div>
+                            <div class="comparison-title">Practical Tools</div>
+                        </div>
+                        <p><strong>DBR Tools:</strong></p>
+                        <p>• Qualitative data analysis software (NVivo, Atlas.ti)</p>
+                        <p>• Survey platforms (Qualtrics, SurveyMonkey)</p>
+                        <p>• Collaboration tools (Miro, Figma)</p>
+                        
+                        <p><strong>Lean Tools:</strong></p>
+                        <p>• Analytics platforms (Google Analytics, Mixpanel)</p>
+                        <p>• A/B testing tools (Optimizely, Split)</p>
+                        <p>• Customer feedback tools (Typeform, Hotjar)</p>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">📖</div>
+                            <div class="comparison-title">Case Studies</div>
+                        </div>
+                        <p><strong>DBR Examples:</strong></p>
+                        <p>• Quest Atlantis (educational gaming)</p>
+                        <p>• SimCalc (mathematics education)</p>
+                        <p>• Knowledge Forum (collaborative learning)</p>
+                        
+                        <p><strong>Lean Examples:</strong></p>
+                        <p>• Dropbox MVP video</p>
+                        <p>• Zappos shoe validation</p>
+                        <p>• Buffer's landing page test</p>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🎯</div>
+                            <div class="comparison-title">Getting Started</div>
+                        </div>
+                        <p><strong>Start with DBR:</strong></p>
+                        <p>1. Identify a complex educational/social problem</p>
+                        <p>2. Review existing literature and theory</p>
+                        <p>3. Find academic or institutional partners</p>
+                        <p>4. Plan for long-term commitment</p>
+                        
+                        <p><strong>Start with Lean:</strong></p>
+                        <p>1. Define your riskiest assumption</p>
+                        <p>2. Design a minimal test</p>
+                        <p>3. Set up measurement systems</p>
+                        <p>4. Plan rapid iteration cycles</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>🔗 External Links & References</h2>
+                    <p><strong>Design Based Research:</strong></p>
+                    <p>• <em>Note: In a real deployment, these would be actual links</em></p>
+                    <p>• Design-Based Research Collective publications</p>
+                    <p>• Educational Technology Research and Development journal</p>
+                    <p>• International Journal of Designs for Learning</p>
+                    
+                    <p><strong>Lean Method:</strong></p>
+                    <p>• <em>Note: In a real deployment, these would be actual links</em></p>
+                    <p>• Lean Startup methodology website</p>
+                    <p>• Steve Blank's Customer Development methodology</p>
+                    <p>• Harvard Business Review articles on Lean Startup</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 DBR vs Lean Method Guide. Created for educational purposes.</p>
+            <p>This website compares Design Based Research and Lean methodologies.</p>
+            <p><a href="#" onclick="showPage('home')">Home</a> | 
+               <a href="#" onclick="showPage('comparison')">Compare</a> | 
+               <a href="#" onclick="showPage('resources')">Resources</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Update navigation active states
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate current nav link
+            const currentNavLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+            if (currentNavLink && currentNavLink.classList.contains('nav-links')) {
+                currentNavLink.classList.add('active');
+            } else {
+                // For nav items, find the parent nav link
+                navLinks.forEach(link => {
+                    if (link.getAttribute('onclick') === `showPage('${pageId}')`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Close mobile menu if open
+            const navLinksContainer = document.getElementById('nav-links');
+            navLinksContainer.classList.remove('active');
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('nav-links');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navContainer = document.querySelector('.nav-container');
+            
+            if (!navContainer.contains(event.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.page) {
+                showPage(event.state.page);
+            }
+        });
+
+        // Add page state to browser history
+        const originalShowPage = showPage;
+        showPage = function(pageId) {
+            originalShowPage(pageId);
+            history.pushState({page: pageId}, '', '#' + pageId);
+        };
+
+        // Initialize page based on URL hash
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash + '-page')) {
+                showPage(hash);
+            } else {
+                showPage('home');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !href.includes('onclick')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add animation delays to cards for staggered entrance
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.method-card, .comparison-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        window.addEventListener('load', function() {
+            const animatedElements = document.querySelectorAll('.card, .method-card, .comparison-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
+                </section>
+
+                <div class="methods-grid">
+                    <div class="method-card dbr-card">
+                        <div class="method-header">
+                            <div class="method-icon">🔬</div>
+                            <div class="method-title">
+                                <h3>Design Based Research</h3>
+                                <p>Academic & Social Impact</p>
+                            </div>
+                        </div>
+                        <div class="method-description">
+                            A research methodology that solves real-world problems while advancing theoretical knowledge through iterative design and rigorous testing in authentic contexts.
+                        </div>
+                        <a href="#" class="learn-more-btn" onclick="showPage('dbr')">Learn More →</a>
+                    </div>
+
+                    <div class="method-card lean-card">
+                        <div class="method-header">
+                            <div class="method-icon">🚀</div>
+                            <div class="method-title">
+                                <h3>Lean Method</h3>
+                                <p>Business & Market Focus</p>
+                            </div>
+                        </div>
+                        <div class="method-description">
+                            A business methodology that minimizes waste and maximizes learning through rapid experimentation, customer feedback, and validated learning cycles.
+                        </div>
+                        <a href="#" class="learn-more-btn" onclick="showPage('lean')">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Why Compare These Methods?</h2>
+                    <p>Both Design Based Research and the Lean Method use iterative approaches to solve problems, but they serve different purposes and contexts. Understanding their differences helps you choose the right methodology for your specific needs.</p>
+                    <p>Whether you're conducting academic research, developing educational interventions, launching a startup, or creating innovative products, knowing when to apply each approach can significantly impact your success.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DBR Page -->
+        <div id="dbr-page" class="page">
+            <div class="container">
+                <a href="#" class="back-btn" onclick="showPage('home')">← Back to Home</a>
+                
+                <div class="card">
+                    <h2>Design Based Research (DBR)</h2>
+                    <p>Design Based Research is a systematic methodology that addresses complex educational and social challenges by creating, testing, and refining innovative solutions while simultaneously advancing theoretical understanding.</p>
+                    
+                    <div class="process-steps">
+                        <h3>The DBR Process</h3>
+                        <div class="steps-container">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <span><strong>Identify Problem:</strong> Start with a complex, real-world challenge</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <span><strong>Literature Review:</strong> Ground design in existing theory and research</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <span><strong>Design Solution:</strong> Create evidence-based interventions</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <span><strong>Test Implementation:</strong> Deploy in authentic contexts</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <span><strong>Collect Data:</strong> Use rigorous research methods</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">6</div>
+                                <span><strong>Analyze & Refine:</strong> Improve design based on findings</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">7</div>
+                                <span><strong>Share Knowledge:</strong> Contribute to theory and practice</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="methods-grid">
+                    <div class="card">
+                        <h2>Key Characteristics</h2>
+                        <p><strong>🎯 Purpose:</strong> Solve complex problems + advance theory</p>
+                        <p><strong>⏱️ Timeline:</strong> 6 months to 3+ years</p>
+                        <p><strong>🔬 Rigor:</strong> High academic standards</p>
+                        <p><strong>🤝 Collaboration:</strong> Deep community partnerships</p>
+                        <p><strong>📊 Focus:</strong> Sustainable, evidence-based solutions</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>Best Used For</h2>
+                        <p>• Educational interventions and curriculum design</p>
+                        <p>• Social programs and community initiatives</p>
+                        <p>• Technology tools for learning environments</p>
+                        <p>• Policy development and implementation</p>
+                        <p>• Complex organizational change initiatives</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Advantages & Considerations</h2>
+                    <p><strong>Advantages:</strong></p>
+                    <p>• Produces both practical solutions and theoretical contributions</p>
+                    <p>• Deep understanding of context and stakeholder needs</p>
+                    <p>• Rigorous evidence base for recommendations</p>
+                    <p>• Sustainable implementation through stakeholder buy-in</p>
+                    
+                    <p><strong>Considerations:</strong></p>
+                    <p>• Requires significant time and resource investment</p>
+                    <p>• May not be suitable for fast-moving commercial environments</p>
+                    <p>• Needs research expertise and academic partnerships</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lean Page -->
+        <div id="lean-page" class="page">
+            <div class="container">
+                <a href="#" class="back-btn" onclick="showPage('home')">← Back to Home</a>
+                
+                <div class="card">
+                    <h2>The Lean Method</h2>
+                    <p>The Lean Method is a business development approach that emphasizes rapid experimentation, validated learning, and iterative product development to minimize waste and maximize customer value.</p>
+                    
+                    <div class="process-steps">
+                        <h3>The Build-Measure-Learn Cycle</h3>
+                        <div class="steps-container">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <span><strong>Build MVP:</strong> Create minimum viable product</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <span><strong>Measure Response:</strong> Collect customer feedback and data</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <span><strong>Learn Insights:</strong> Analyze what works and what doesn't</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <span><strong>Pivot or Persevere:</strong> Decide direction based on evidence</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <span><strong>Scale Success:</strong> Expand what validates with customers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="methods-grid">
+                    <div class="card">
+                        <h2>Key Characteristics</h2>
+                        <p><strong>🎯 Purpose:</strong> Validate business ideas quickly</p>
+                        <p><strong>⏱️ Timeline:</strong> 2 weeks to 6 months</p>
+                        <p><strong>🔬 Rigor:</strong> Focus on actionable metrics</p>
+                        <p><strong>🤝 Collaboration:</strong> Customer-centric feedback loops</p>
+                        <p><strong>📊 Focus:</strong> Market viability and efficiency</p>
+                    </div>
+
+                    <div class="card">
+                        <h2>Best Used For</h2>
+                        <p>• Startup product development</p>
+                        <p>• New feature validation</p>
+                        <p>• Market entry strategies</p>
+                        <p>• Business model innovation</p>
+                        <p>• Resource-constrained projects</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Advantages & Considerations</h2>
+                    <p><strong>Advantages:</strong></p>
+                    <p>• Fast time-to-market and quick validation</p>
+                    <p>• Minimizes resource waste and financial risk</p>
+                    <p>• Highly responsive to customer needs</p>
+                    <p>• Promotes innovation and experimentation</p>
+                    
+                    <p><strong>Considerations:</strong></p>
+                    <p>• May lack depth for complex, systemic problems</p>
+                    <p>• Focus on speed can sometimes compromise thoroughness</p>
+                    <p>• Less suitable for research or theory-building goals</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Page -->
+        <div id="comparison-page" class="page">
+            <div class="container">
+                <a href="#" class="back-btn" onclick="showPage('home')">← Back to Home</a>
+                
+                <section class="hero-section">
+                    <h1>Side-by-Side Comparison</h1>
+                    <p>Understanding when to use Design Based Research vs the Lean Method</p>
+                </section>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🎯</div>
+                            <div class="comparison-title">Primary Purpose</div>
+                        </div>
+                        <div class="comparison-content">
+                            <div class="comparison-item dbr-item">
+                                <h4>DBR</h4>
+                                <p>Solve complex problems + advance theoretical knowledge</p>
+                            </div>
+                            <div class="comparison-item lean-item">
+                                <h4>Lean</h4>
+                                <p>Minimize waste + validate business ideas quickly</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">⏰</div>
+                            <div class="comparison-title">Timeline</div>
+                        </div>
+                        <div class="comparison-content">
+                            <div class="comparison-item dbr-item">
+                                <h4>DBR</h4>
+                                <p>6 months to 3+ years for comprehensive study</p>
+                            </div>
+                            <div class="comparison-item lean-item">
+                                <h4>Lean</h4>
+                                <p>2 weeks to 6 months for rapid validation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🏗️</div>
+                            <div class="comparison-title">Origin & Context</div>
+                        </div>
+                        <div class="comparison-content">
+                            <div class="comparison-item dbr-item">
+                                <h4>DBR</h4>
+                                <p>Educational research (2000s) - Academic & social sectors</p>
+                            </div>
+                            <div class="comparison-item lean-item">
+                                <h4>Lean</h4>
+                                <p>Toyota manufacturing (1950s) - Business & startups</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🔍</div>
+                            <div class="comparison-title">Research Rigor</div>
+                        </div>
+                        <div class="comparison-content">
+                            <div class="comparison-item dbr-item">
+                                <h4>DBR</h4>
+                                <p>High academic standards, peer review, theory building</p>
+                            </div>
+                            <div class="comparison-item lean-item">
+                                <h4>Lean</h4>
+                                <p>Practical focus on business metrics & customer feedback</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🤝</div>
+                            <div class="comparison-title">Collaboration Style</div>
+                        </div>
+                        <div class="comparison-content">
+                            <div class="comparison-item dbr-item">
+                                <h4>DBR</h4>
+                                <p>Deep partnerships with communities & stakeholders</p>
+                            </div>
+                            <div class="comparison-item lean-item">
+                                <h4>Lean</h4>
+                                <p>Customer-focused with transactional feedback loops</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="comparison-icon">🎨</div>
+                            <div class="comparison-title">Problem Types</div>
+                        </div>
+                        <div class="comparison-content">
+                            <div class="comparison-item dbr-item">
+                                <h4>DBR</h4>
+                                <p>Complex social, educational, systemic challenges</p>
+                            </div>
+                            <div class="comparison-item lean-item">
+                                <h4>Lean</h4>
+                                <p>Business problems, product-market fit, commercial viability</p>
+                            </div>
+                        </div>
+                    </div>
+                </div
